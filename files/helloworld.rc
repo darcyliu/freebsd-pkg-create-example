@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# PROVIDE: helloworld
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name=helloworld
+rcvar=helloworld_enable
+
+load_rc_config $name
+
+: ${helloworld_enable="NO"}
+: ${helloworld_home_dir:="/usr/local/helloworld"}
+
+pidfile="/var/run/${name}.pid"
+procname=/usr/local/bin/helloworld
+command=/usr/sbin/daemon
+command_args="-f -p ${pidfile} -u root ${procname} --home=${hello_home_dir} --logfile=default"
+
+run_rc_command "$1"
+

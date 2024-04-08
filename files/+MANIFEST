@@ -1,0 +1,21 @@
+name: helloworld
+version: "1.0.0"
+origin: sysutils/helloworld
+comment: "helloworld package"
+desc: "Hello World Example"
+maintainer: darcy@example.com
+www: https://darcy.org
+prefix: /
+
+
+files: {
+  /usr/local/bin/helloworld: 'sha256sum'
+  /usr/local/etc/rc.d/helloworld: {sum: 'sha256sum', perm: 0755 }
+}
+scripts {
+    pre-install: <<EOD
+    #!/bin/sh
+    echo pre-install
+EOD
+    post-install = "sysrc helloworld_enable=YES"
+}
